@@ -15,8 +15,6 @@ resource "aws_subnet" "public_subnet" {
   tags = {
     Name = var.public_subnet_name
   }
-
-
 }
 
 resource "aws_subnet" "private_subnet" {
@@ -99,3 +97,27 @@ resource "aws_route" "private_rt_route" {
 # resource "aws_inst" "name" {
 
 # }
+
+resource "aws_instance" "web_server" {
+  ami                         = var.web_server_ami_id
+  instance_type               = var.web_server_instance_type
+  key_name                    = data.aws_key_pair.this.key_name
+  subnet_id                   = aws_subnet.public_subnet.id
+  vpc_security_group_ids      = [var.security_group_id]
+  associate_public_ip_address = true
+  tags = {
+    Name = var.web_server_name
+  }
+}
+
+resource "aws_instance" "database_server" {
+  ami                         = var.database_server_ami_id
+  instance_type               = var.database_server_instance_type
+  key_name                    = data.aws_key_pair.this.key_name
+  subnet_id                   = aws_subnet.private_subnet.id
+  vpc_security_group_ids      = [var.security_group_id]
+  associate_public_ip_address = false
+  tags = {
+    Name = var.database_server_name
+  }
+}

@@ -54,3 +54,42 @@ variable "public_internet_destination_cidr" {
   type        = string
   default     = "0.0.0.0/0"
 }
+
+variable "web_server_name" {
+  description = "Name of the Web Server"
+  type        = string
+}
+
+variable "web_server_ami_id" {
+  description = "Web Server AMI ID"
+  type        = string
+}
+
+variable "web_server_instance_type" {
+  description = "Web Server Instance Type"
+  type        = string
+}
+
+variable "database_server_ami_id" {
+  description = "Database AMI ID"
+  type        = string
+}
+
+variable "database_server_instance_type" {
+  description = "Database Instance Type"
+  type        = string
+}
+variable "key_pair_name" {
+  description = "Key Pair Name"
+  type        = string
+}
+
+variable "security_group_id" {
+  description = "Security Group ID"
+  type        = string
+}
+
+variable "database_server_name" {
+  description = "Name of the Database Server"
+  type        = string
+}
